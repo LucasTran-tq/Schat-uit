@@ -1,0 +1,76 @@
+=============== Mar 4, 2022 (+07) ===============
+14:16:01.233421 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:16:01.237141 db@open opening
+14:16:01.238202 version@stat F·[] S·0B[] Sc·[]
+14:16:01.240219 db@janitor F·2 G·0
+14:16:01.240219 db@open done T·3.0779ms
+14:16:01.255963 db@close closing
+14:16:01.255963 db@close done T·0s
+=============== Mar 4, 2022 (+07) ===============
+14:26:41.355465 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:26:41.356462 version@stat F·[] S·0B[] Sc·[]
+14:26:41.356462 db@open opening
+14:26:41.356462 journal@recovery F·1
+14:26:41.362499 journal@recovery recovering @1
+14:26:41.366692 memdb@flush created L0@2 N·628 S·50KiB "\x02d\xfc..\x19Ba,v433":"\xfe\x88\xcf..H\xef\xcc,v365"
+14:26:41.371410 version@stat F·[1] S·50KiB[50KiB] Sc·[0.25]
+14:26:41.380355 db@janitor F·3 G·0
+14:26:41.380355 db@open done T·23.8926ms
+14:39:28.963341 db@close closing
+14:39:28.964085 db@close done T·744.1µs
+=============== Mar 4, 2022 (+07) ===============
+14:40:05.356798 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:40:05.357315 version@stat F·[1] S·50KiB[50KiB] Sc·[0.25]
+14:40:05.357315 db@open opening
+14:40:05.357315 journal@recovery F·1
+14:40:05.359896 journal@recovery recovering @3
+14:40:05.364196 memdb@flush created L0@5 N·344 S·25KiB "\a\x82\xd4..\xa4\xf4\x88,v958":"\xfbd?..>\xb3\xb9,v971"
+14:40:05.367435 version@stat F·[2] S·76KiB[76KiB] Sc·[0.50]
+14:40:05.374244 db@janitor F·4 G·0
+14:40:05.374244 db@open done T·16.9289ms
+14:42:45.591344 db@close closing
+14:42:45.591344 db@close done T·0s
+=============== Mar 4, 2022 (+07) ===============
+14:42:57.369236 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:42:57.369751 version@stat F·[2] S·76KiB[76KiB] Sc·[0.50]
+14:42:57.369751 db@open opening
+14:42:57.369751 journal@recovery F·1
+14:42:57.372345 journal@recovery recovering @6
+14:42:57.374070 memdb@flush created L0@8 N·4 S·1KiB "Sna..tor,v976":"unc..own,v975"
+14:42:57.378321 version@stat F·[3] S·77KiB[77KiB] Sc·[0.75]
+14:42:57.388029 db@janitor F·5 G·0
+14:42:57.388029 db@open done T·18.2785ms
+14:46:42.908010 db@close closing
+14:46:42.909008 db@close done T·997.8µs
+=============== Mar 4, 2022 (+07) ===============
+14:46:54.295942 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:46:54.295942 version@stat F·[3] S·77KiB[77KiB] Sc·[0.75]
+14:46:54.295942 db@open opening
+14:46:54.295942 journal@recovery F·1
+14:46:54.298927 journal@recovery recovering @9
+14:46:54.301918 memdb@flush created L0@11 N·4 S·1KiB "Sna..tor,v981":"unc..own,v980"
+14:46:54.304910 version@stat F·[4] S·78KiB[78KiB] Sc·[1.00]
+14:46:54.312892 db@janitor F·6 G·0
+14:46:54.312892 db@open done T·16.9498ms
+14:46:54.312892 table@compaction L0·4 -> L1·0 S·78KiB Q·984
+14:46:54.317876 table@build created L1@14 N·953 S·76KiB "\x02d\xfc..\x19Ba,v433":"\xfe\x88\xcf..H\xef\xcc,v365"
+14:46:54.317876 version@stat F·[0 1] S·76KiB[0B 76KiB] Sc·[0.00 0.00]
+14:46:54.319873 table@compaction committed F-3 S-1KiB Ke·0 D·27 T·6.9813ms
+14:46:54.319873 table@remove removed @8
+14:46:54.319873 table@remove removed @5
+14:46:54.320868 table@remove removed @2
+14:47:08.262288 db@close closing
+14:47:08.262288 db@close done T·0s
+=============== Mar 4, 2022 (+07) ===============
+14:48:06.600042 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:48:06.601231 version@stat F·[0 1] S·76KiB[0B 76KiB] Sc·[0.00 0.00]
+14:48:06.601231 db@open opening
+14:48:06.601776 journal@recovery F·1
+14:48:06.609365 journal@recovery recovering @12
+14:48:06.628555 memdb@flush created L0@15 N·4 S·1KiB "Sna..tor,v986":"unc..own,v985"
+14:48:06.638781 version@stat F·[1 1] S·77KiB[1KiB 76KiB] Sc·[0.25 0.00]
+14:48:06.649050 db@janitor F·5 G·1
+14:48:06.649050 db@janitor removing table-11
+14:48:06.649585 db@open done T·48.3544ms
+16:51:13.610285 db@close closing
+16:51:13.616912 db@close done T·6.6264ms
