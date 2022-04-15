@@ -1,0 +1,26 @@
+>> Unlocking account 0xef9a418df88263aa0fc9dc71fce2041ba17b400c
+>> Deploying user
+
+   Deploying 'User'
+   ----------------
+   > transaction hash:    0x311ea3f4c264e02b3d37cd5eb9165575b08ddc61471dec002dc494e55cbfd3a4
+   > Blocks: 0            Seconds: 0
+   > contract address:    0xD92509d5024b7999395FB4767d1160035549ca1f
+   > block number:        3
+   > block timestamp:     1646378956
+   > account:             0xEF9A418dF88263aa0fC9Dc71fce2041ba17B400c
+   > balance:             904625697166532776746648320380374280103671755200316906558.261276940821325312
+   > gas used:            806766 (0xc4f6e)
+   > gas price:           1 gwei
+   > value sent:          0 ETH
+   > total cost:          0.000806766 ETH
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:         0.000806766 ETH
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.001055608 ETH
