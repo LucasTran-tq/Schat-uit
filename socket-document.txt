@@ -11,16 +11,18 @@ $$ Server to client: Events Emit
 #Todo: Chat
 1. error => response errors
 2. notification => response disconnected time of user to single room that user was in it
-3. chatRooms => response chat rooms that user was owned
+3. lastMessages => response chat rooms and last messages that user was owned
 4. messageClient => response messages to client
 5. showAllChatOnRoom => show all chat messages on user's room
 6. offlineTime => response user's offline time when user disconnected
 7. getUserByPhone => response User
+8. newRoom => response lastMessage
+9. messagesLoadMore => response message load more
 
 
 #Todo: Action
-7. onGetTaskById => response a task detail by id of user
-8. onGetAllTask => reponse the task list of user
+1. onGetTaskById => response a task detail by id of user
+2. onGetAllTask => reponse the task list of user
 
 
 $$ Client to Server: Events On
@@ -28,13 +30,13 @@ $$ Client to Server: Events On
 1. getListRoomForUser => request user id
 2. sendMessage => request ChatMessageDto
 3. chatSingle => request ChatWithAnotherUserDto{anotherUserId, ChatMessageDto}
-4. joinRoom => request chat room id
-<<<<<<< HEAD
+4. joinRoom => request chat room id,
 5. searchUserByPhone => phone: string. Ex: +84145678111
-=======
+6. singleRoom => request chat room
+7. chatGroup => request ChatRoomDto
+8. loadMoreMessages => request PaginateChatRoomDto
 #Todo: Action
-5. addTask => request TaskDto
-6. getAllTask => no request
-7. getTaskById => request task id
-8. deleteTask => request task id
->>>>>>> 49ea03249fb7bc84bc478330b09103fd6ff26936
+1. addTask => request TaskDto
+2. getAllTask => no request
+3. getTaskById => request task id
+4. deleteTask => request task id

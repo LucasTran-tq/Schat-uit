@@ -4,7 +4,7 @@ import * as mongoose from "mongoose";
 import { Field } from "./field.schema";
 
 export type TaskCategoryDocument = TaskCategory & mongoose.Document;
-@Schema()
+@Schema({ timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } })
 export class TaskCategory {
     @Transform(({ value }) => value.toString())
     _id: mongoose.ObjectId;
@@ -15,6 +15,12 @@ export class TaskCategory {
     @Prop({type: mongoose.Types.ObjectId, ref: Field.name})
     @Type(() => Field)
     field: Field;
+
+    @Prop({ type: Date, default: Date.now })
+    created_at?: Date;
+
+    @Prop({ type: Date, default: Date.now })
+    updated_at?: Date;
     
 }
 

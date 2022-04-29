@@ -1,6 +1,5 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { TaskParticipant } from 'src/task_managerment/schemas/task.schema';
 import { TaskService } from 'src/task_managerment/services/task.service';
 import { ROLES_KEY } from '../decorators/roles.decorator';
 import { TaskRole } from '../enums/task_role.enum';

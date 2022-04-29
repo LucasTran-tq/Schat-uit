@@ -13,10 +13,6 @@ export class ChatMessageDto{
     message_content:string;
 
     @ApiProperty()
-    @IsDate()
-    message_time:Date;
-
-    @ApiProperty()
     @IsString()
     chat_room_id: string;
 }

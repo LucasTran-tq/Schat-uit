@@ -6,7 +6,8 @@ import { Model, FilterQuery } from 'mongoose'
 export class TaskRepository {
     constructor(@InjectModel(Task.name) private taskModel: Model<TaskDocument>) { }
     public async create(task: Task): Promise<Task> {
-
+        console.log(task);
+        
         return await new this.taskModel(task).save();
     }
 
