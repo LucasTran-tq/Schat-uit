@@ -23,8 +23,8 @@ export class ChatRoomService {
         }
     }
 
-    public async getAllChatRoom(userId: String): Promise<ChatRoom[]> {
-        return await this.chatRoomRepository.getAll({participants: {$in: [userId]}});
+    public async getAllChatRoom(userId: String, page: number): Promise<ChatRoom[]> {
+        return await this.chatRoomRepository.getAll({participants: {$in: [userId]}},page);
     }
 
     public async checkUserInChatRoom(chatRoomId: string,userId: string): Promise<ChatRoom> {

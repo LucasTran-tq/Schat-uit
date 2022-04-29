@@ -93,7 +93,6 @@ export abstract class AppGateway {
       const accessToken = client.handshake.headers.authorization.split(' ')[1];
       const decodeToken = await this.getAuthService.verifyToken(accessToken);
       const userId = (await decodeToken)['user_id'];
-
       return await this.getAuthService.findUserById(userId);
     } catch (err) {
       return this.server.to(client.id).emit('error', err);

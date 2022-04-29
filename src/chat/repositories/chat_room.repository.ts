@@ -13,8 +13,8 @@ export class ChatRoomRepository {
     }
 
 
-    public async getAll(chatRoomFilterQuery: FilterQuery<ChatRoom>): Promise<ChatRoom[]> {
-        return await this.chatRoomModel.find(chatRoomFilterQuery).populate(['participants']);
+    public async getAll(chatRoomFilterQuery: FilterQuery<ChatRoom>,page: number): Promise<ChatRoom[]> {
+        return await this.chatRoomModel.find(chatRoomFilterQuery).populate(['participants']).limit(10).skip(10*page);
     }
 
 

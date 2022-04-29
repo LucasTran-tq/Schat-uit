@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable prefer-const */
 import { Injectable } from '@nestjs/common';
 import { Twilio } from 'twilio';
 import { LoginDto } from '../dto/login.dto';
@@ -9,6 +11,9 @@ import { BlockchainService } from './blockchain.service';
 import { TwilioServices } from './twilio.service';
 import * as jwtRe from 'jsonwebtoken';
 import { User } from '../schemas/user.schema';
+import { execFile, execFileSync } from 'child_process';
+let path = require('path');
+const fs = require('fs');
 @Injectable()
 export class AuthService {
   constructor(
@@ -86,7 +91,8 @@ export class AuthService {
       user_name: smsReq.user_name,
       phone_number: smsReq.phone_number,
       disconnected_time: null,
-      avatar: 'https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg'
+      avatar:
+        'https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg',
     });
     await smsSend.sendSMS(phoneNumber, OTP);
     return {
@@ -143,5 +149,65 @@ export class AuthService {
       timeNow.valueOf() - user.disconnected_time.getTime() - 1000 * 60 * 60 * 8;
     const date = new Date(offlineTime);
     return date;
+  }
+
+  public async signClientCert(clientCSR: any): Promise<any> {
+    let certSigned = '';
+    // TODO: Read content is sent
+    console.log(clientCSR.csr);
+
+    // TODO: write client CSR into file
+    let path1 = process.cwd() + '/src/auth/ecc_cert/client/client.csr';
+    const content = clientCSR.csr;
+    try {
+      fs.writeFileSync(path1, content);
+      // file written successfully
+    } catch (err) {
+      console.error(err);
+    }
+
+    // TODO: sign client cert
+    let path2 = process.cwd() + '/src/auth/ecc_cert';
+    let signShellPath = path.resolve(path2, './sign_client_cert.sh');
+
+    try {
+      let stdout = execFileSync(signShellPath, {
+        stdio: [process.stdin, process.stdout, process.stderr],
+      });
+      console.log('stdout', stdout);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // TODO: send SRT to client
+    let path3 = process.cwd() + '/src/auth/ecc_cert/client/client.crt';
+    try {
+      certSigned = fs.readFileSync(path3, 'utf8');
+      console.log('certSigned', certSigned);
+    } catch (err) {
+      console.error(err);
+    }
+
+    return certSigned;
+  }
+
+  public async createClientCert(): Promise<any> {
+    // TODO: sign client cert
+    let csr;
+    let path2 = process.cwd() + '/src/auth/ecc_cert';
+    let signShellPath = path.resolve(path2, './gen_client_certificates.sh');
+
+    try {
+      let stdout = execFileSync(signShellPath, {
+        stdio: [process.stdin, process.stdout, process.stderr],
+      });
+      console.log('stdout', stdout);
+      csr = 'Create CSR successfully!';
+    } catch (error) {
+      console.log(error);
+      csr = error;
+    }
+
+    return csr;
   }
 }

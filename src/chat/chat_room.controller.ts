@@ -20,7 +20,7 @@ export class ChatRoomController {
 
     @Get('/all-room-by-user/:userId')
     public async getAllChatRoom(@Param('userId') userId: String): Promise<ChatRoom[]>{
-        return this.chatRoomService.getAllChatRoom(userId);
+        return this.chatRoomService.getAllChatRoom(userId, 0);
     }
 
     @Get('/find-by-id/:id')
