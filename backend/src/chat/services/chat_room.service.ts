@@ -32,7 +32,7 @@ export class ChatRoomService {
     }
 
     public async checkParticipantsInRoom(usersId: string[]): Promise<ChatRoom> {
-        return this.chatRoomRepository.getOne({participants: usersId, single_room: true});
+        return this.chatRoomRepository.getOne({participants:{$all: usersId, $size: 2}, single_room: true});
     }
 
     public async getChatRoomById(chatRoomId: string): Promise<ChatRoom> {

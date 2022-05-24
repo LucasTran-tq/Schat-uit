@@ -66,6 +66,10 @@ import { PostRepository } from './post_management/repositories/post.repository';
 import { PostCategoryRepository } from './post_management/repositories/post_category.repository';
 import { OrganizationRepository } from './post_management/repositories/organization.repository';
 import { PostManagementGateway } from './post_management/gateways/post_management.gateway';
+import { StreamingFileController } from './streaming-file/streaming-file.controller';
+import { StreamingFileService } from './streaming-file/streaming-file.service';
+import { BlockchainConnectionService } from 'smart_contract/connection';
+
 require('dotenv').config();
 
 @Module({
@@ -114,6 +118,7 @@ require('dotenv').config();
     FieldController,
     TaskCategoryController,
     TaskController,
+    StreamingFileController,
   ],
   providers: [
     //TODO: Add services here
@@ -122,6 +127,7 @@ require('dotenv').config();
     AppService,
     AuthService,
     BlockchainService,
+    BlockchainConnectionService,
     SmsServices,
     TwilioServices,
 
@@ -162,6 +168,9 @@ require('dotenv').config();
     ChatGateway,
     TaskManagermentGateway,
     PostManagementGateway,
+
+    //streaming File
+    StreamingFileService,
 
     /* Other Providers */
     {

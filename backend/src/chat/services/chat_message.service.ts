@@ -7,6 +7,7 @@ import { ChatMessageDto } from '../dto/chat_message.dto';
 import { ChatMessageRepository } from '../repositories/chat_message.repository';
 import { ChatMessage } from '../schemas/chat_message.schema';
 import { ChatRoom } from '../schemas/chat_room.schema';
+import { StreamingFileService } from '../../streaming-file/streaming-file.service';
 
 @Injectable()
 export class ChatMessageService {
@@ -14,6 +15,7 @@ export class ChatMessageService {
     private readonly chatMessageRepository: ChatMessageRepository,
     private readonly chatRoomRepository: ChatRoomRepository,
     private readonly userRepository: UserRepository,
+    private readonly streamingFileService: StreamingFileService,
   ) { }
   //ChatMessage | Boolean
   public async createChatMessage(userId: string, chatMessageDto: ChatMessageDto): Promise<any> {
@@ -22,11 +24,18 @@ export class ChatMessageService {
       const chatRoom = await this.chatRoomRepository.getOne({
         _id: chatMessageDto.chat_room_id,
       });
+
+      let _chatMessageDto:ChatMessageDto = {...chatMessageDto};
+
+      if(chatMessageDto.message_type != 2){
+        _chatMessageDto = await this.streamingFileService.handleSaveFile(chatMessageDto);
+      }
+
       if (chatRoom) {
         return await this.chatMessageRepository.create({
           user: user,
           chat_room: chatRoom,
-          ...chatMessageDto,
+          ..._chatMessageDto,
         });
       } else {
         return {

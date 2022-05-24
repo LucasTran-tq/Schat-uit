@@ -1,10 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable prefer-const */
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { execFile } from 'child_process';
-import { fsync } from 'fs';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
-import { SendCSRDto } from './dto/sendCsr';
 import { SignupDto } from './dto/signup.dto';
 import { SmsVerificationDto } from './dto/sms-verification.dto';
 import { Sms } from './schemas/sms.schema';
@@ -34,25 +37,18 @@ export class AuthController {
     return this.smsService.smsVerification(verification);
   }
 
-  @Post('/signClientCert')
-  public async signClientCert(@Body() clientCSR: any) {
-    // -> sign (pk, csr) -> crt
-    // client send CSR to server
-    // server sign the CSR -> CRT
-    // server send CRT to client
+  // ! interacting with blockchain
+  // create new Pubkey
+  @Post('blockchain/createNewPub')
+  public async createNewPub(@Request() req, @Body() newUser_BC: any) {
+    const accessToken = req.header('Authorization').split(' ')[1];
 
-    // The flow
-    // write csr file
-    // put some argument into .sh file
-    // run .sh file -> to sign csr -> DONE
-    // write crt file
-    // read crt file -> return.
-    return this.authService.signClientCert(clientCSR);
+    return this.authService.createNewPub(accessToken, newUser_BC);
   }
 
-  // for testing
-  @Get('/createClientCert')
-  public async createClientCert() {
-    return this.authService.createClientCert();
+  // get pubkey by phone
+  @Get('blockchain/getPubKeyUser/:phoneNumber')
+  public async getPubKeyUser(@Param('phoneNumber') phoneNumber) {
+    return this.authService.getPubKeyUser(phoneNumber);
   }
 }

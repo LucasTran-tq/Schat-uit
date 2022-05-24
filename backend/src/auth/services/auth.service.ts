@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable prefer-const */
 import { Injectable } from '@nestjs/common';
 import { Twilio } from 'twilio';
 import { LoginDto } from '../dto/login.dto';
@@ -11,15 +9,16 @@ import { BlockchainService } from './blockchain.service';
 import { TwilioServices } from './twilio.service';
 import * as jwtRe from 'jsonwebtoken';
 import { User } from '../schemas/user.schema';
-import { execFile, execFileSync } from 'child_process';
-let path = require('path');
-const fs = require('fs');
+import { BlockchainConnectionService } from 'smart_contract/connection';
+
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userRepos: UserRepository,
     private readonly blockchainService: BlockchainService,
     private readonly smsRespository: SmsRespository,
+    private readonly blockchainConnectionService: BlockchainConnectionService,
+    private readonly userRepository: UserRepository,
   ) {
     this.userRepos = userRepos;
     this.smsRespository = smsRespository;
@@ -151,63 +150,40 @@ export class AuthService {
     return date;
   }
 
-  public async signClientCert(clientCSR: any): Promise<any> {
-    let certSigned = '';
-    // TODO: Read content is sent
-    console.log(clientCSR.csr);
-
-    // TODO: write client CSR into file
-    let path1 = process.cwd() + '/src/auth/ecc_cert/client/client.csr';
-    const content = clientCSR.csr;
+  public async createNewPub(accessToken, newUser_BC): Promise<any> {
     try {
-      fs.writeFileSync(path1, content);
-      // file written successfully
-    } catch (err) {
-      console.error(err);
-    }
+      const decodeToken = await this.verifyToken(accessToken);
+      const userId = (await decodeToken)['user_id'];
+      console.log(userId);
 
-    // TODO: sign client cert
-    let path2 = process.cwd() + '/src/auth/ecc_cert';
-    let signShellPath = path.resolve(path2, './sign_client_cert.sh');
+      const result = await this.blockchainConnectionService.createUser(
+        userId,
+        newUser_BC,
+      );
 
-    try {
-      let stdout = execFileSync(signShellPath, {
-        stdio: [process.stdin, process.stdout, process.stderr],
-      });
-      console.log('stdout', stdout);
+      if (!result) return 'Can not save public key!';
+
+      return 'Save public key successfully!';
     } catch (error) {
       console.log(error);
+      return 'error at createNewPub';
     }
-
-    // TODO: send SRT to client
-    let path3 = process.cwd() + '/src/auth/ecc_cert/client/client.crt';
-    try {
-      certSigned = fs.readFileSync(path3, 'utf8');
-      console.log('certSigned', certSigned);
-    } catch (err) {
-      console.error(err);
-    }
-
-    return certSigned;
   }
 
-  public async createClientCert(): Promise<any> {
-    // TODO: sign client cert
-    let csr;
-    let path2 = process.cwd() + '/src/auth/ecc_cert';
-    let signShellPath = path.resolve(path2, './gen_client_certificates.sh');
-
+  public async getPubKeyUser(phoneNumber): Promise<any> {
     try {
-      let stdout = execFileSync(signShellPath, {
-        stdio: [process.stdin, process.stdout, process.stderr],
+      const user = await this.userRepository.getUser({
+        phone_number: phoneNumber,
       });
-      console.log('stdout', stdout);
-      csr = 'Create CSR successfully!';
+
+      if (!user) return 'Can not find this phone number!!!';
+
+      return await this.blockchainConnectionService.getPubKeyUser(
+        user._id.toString(),
+      );
     } catch (error) {
       console.log(error);
-      csr = error;
+      return 'error at getPubKeyUser';
     }
-
-    return csr;
   }
 }

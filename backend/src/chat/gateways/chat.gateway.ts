@@ -13,7 +13,7 @@ import { ChatRoom } from 'src/chat/schemas/chat_room.schema';
 import { AppGateway } from 'src/gateways/app.gateway';
 import { PaginateChatRoomDto } from '../dto/paginate_chat_room.dto';
 import { ChatMessage } from '../schemas/chat_message.schema';
-@WebSocketGateway(5000, { namespace: 'chat' })
+@WebSocketGateway({ namespace: 'chat' })
 export class ChatGateway
   extends AppGateway
   implements OnGatewayConnection, OnGatewayDisconnect {
@@ -46,6 +46,8 @@ export class ChatGateway
       const userId = user._id.toString();
       const lastMessages = await this.getAllChatRooms(userId, 0);
       //Chỉ trả về client đã kết nối
+      // console.log(lastMessages);
+      
       return await this.server.to(client.id).emit('lastMessages', lastMessages);
     }
     catch (err) {
@@ -128,14 +130,18 @@ export class ChatGateway
 
   @SubscribeMessage('singleRoom')
   public async checkUserOnRoom(client: Socket, userId: string): Promise<any> {
+    console.log()
     try {
       const user = await this.getUserClient(client);
       const anotherUser = await this.getAuthService.findUserById(userId);
+      console.log(user._id.toString())
+      console.log(userId)
       const room: ChatRoom =
         await this.getChatRoomService.checkParticipantsInRoom([
-          user._id.toString(),
           anotherUser._id.toString(),
+          user._id.toString(), 
         ]);
+        console.log(room)
       if (!room) {
         return null;
       }

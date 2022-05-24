@@ -8,7 +8,7 @@ import { OrganizationService } from 'src/post_management/services/organization.s
 import { PostService } from 'src/post_management/services/post.service';
 import { PostCategoryService } from 'src/post_management/services/post_category.service';
 import { TaskService } from 'src/task_managerment/services/task.service';
-@WebSocketGateway(5000)
+@WebSocketGateway()
 export abstract class AppGateway {
   constructor(
     private authService: AuthService,

@@ -13,7 +13,8 @@ export class ChatMessageRepository {
     }
 
     public async findAll(chatMessageFilterQuery: FilterQuery<ChatMessage>, page: number): Promise<ChatMessage[]> {
-        return await this.chatmessageModel.find(chatMessageFilterQuery).populate(['chat_room', 'user']).limit(10).skip(10 * page);
+        // return await this.chatmessageModel.find(chatMessageFilterQuery).populate(['chat_room', 'user']).limit(10).skip(10 * page);
+        return await this.chatmessageModel.find(chatMessageFilterQuery).populate(['chat_room', 'user']);
     }
 
     public async findAllLimit(chatMessageFilterQuery: FilterQuery<ChatMessage>): Promise<ChatMessage> {

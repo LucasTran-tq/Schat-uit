@@ -9,7 +9,7 @@ import { TaskRole } from '../enums/task_role.enum';
 import { Roles } from '../decorators/roles.decorator';
 
 @UseGuards(TaskRolesGuard)
-@WebSocketGateway(5000, { namespace: 'action' })
+@WebSocketGateway({ namespace: 'action' })
 export class TaskManagermentGateway extends AppGateway {
     @SubscribeMessage('addTask')
     public async handleAddTask(client: Socket, taskDto: TaskDto): Promise<Task> {
