@@ -1,4 +1,5 @@
 import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
+import { BlockchainConnectionService } from 'smart_contract/connection';
 import { Socket } from 'socket.io';
 import { User } from 'src/auth/schemas/user.schema';
 import { AuthService } from 'src/auth/services/auth.service';
@@ -16,7 +17,7 @@ export abstract class AppGateway {
     //Chats
     private chatRoomService: ChatRoomService,
     private chatMessageService: ChatMessageService,
-
+    private blockchainConnectionService: BlockchainConnectionService,
     //Actions
     private taskSerivce: TaskService,
 
@@ -53,6 +54,16 @@ export abstract class AppGateway {
 
   get getTaskService(): TaskService {
     return this.taskSerivce;
+  }
+
+  get getBlockchainConnectionService(): BlockchainConnectionService {
+    return this.blockchainConnectionService;
+  }
+
+  set setBlockchainConnectionService(
+    blockchainConnectionService: BlockchainConnectionService,
+  ) {
+    this.blockchainConnectionService = blockchainConnectionService;
   }
 
   // POST MANAGEMENT

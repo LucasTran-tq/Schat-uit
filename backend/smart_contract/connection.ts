@@ -58,11 +58,11 @@ export class BlockchainConnectionService {
         UserContract.networks[networkId].address,
     );
 
-    console.log(userId);
+    // console.log(userId);
 
     const receipt = await userContract.methods.getUser(userId).call();
 
-    console.log(await receipt);
+    // console.log(await receipt);
     return receipt;
   }
 }
