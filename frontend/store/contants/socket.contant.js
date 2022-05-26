@@ -1,0 +1,7 @@
+export const LOAD_ROOMS = "LOAD_ROOMS"
+export const LOAD_MESSAGES = "LOAD_MESSAGES"
+export const LOAD_SOCKET = "LOAD_SOCKET"
+export const IS_LISTEN_CHAT = "IS_LISTEN_CHAT"
+export const IS_LISTEN_NEW_MESS = "IS_LISTEN_NEW_MESS"
+export const IS_LISTEN_FIND_USER = "IS_LISTEN_FIND_USER"
+export const LOAD_SOCKET_TASK = "LOAD_SOCKET"
