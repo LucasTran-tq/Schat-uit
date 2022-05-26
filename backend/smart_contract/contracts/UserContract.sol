@@ -1,19 +1,18 @@
 pragma solidity ^0.6.0;
 
 contract UserContract {
+
+    // mapping(userId, publickey)
     mapping(string => string) internal users;
 
-    //
     string[] user_list;
 
-    // add events
+    // EVENT
     event UserEvent(string _userId, string _pubKey, uint256 index);
 
-    // create
     function createUser(string memory _userId, string memory _pubKey) public {
         users[_userId] = _pubKey;
 
-        //
         user_list.push(_userId);
 
         // Event
@@ -44,37 +43,7 @@ contract UserContract {
         return user_list[_index];
     }
 
-    // Function to count number
-    // of values in a mapping
     function countUserInList() public view returns (uint256) {
         return user_list.length;
     }
 }
-
-// contract UserContract {
-//     // struct
-//     struct S_User {
-//         uint256 _phoneNumber;
-//         string _pubKey;
-//     }
-
-//     uint256 index;
-
-//     // add events
-
-//     // get specific user
-//     mapping(uint256 => S_User) public users;
-
-//     // create
-//     function createUser(uint256 _phoneNumber, string memory _pubKey) public {
-//         users[index] = S_User(_phoneNumber, _pubKey);
-//         // Event
-
-//         index++;
-//     }
-
-//     // get user by phoneNumber
-//     function getUserByPhoneNumber(uint256 _phoneNumber) public {
-
-//     }
-// }

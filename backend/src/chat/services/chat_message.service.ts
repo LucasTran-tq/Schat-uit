@@ -50,36 +50,6 @@ export class ChatMessageService {
     }
   }
 
-  // public async getsummessage(chatRoomId: String, n: number): Promise<any> {
-  //   try {
-  //     const chatMessageInRoom = await this.chatMessageRepository.findAll({ chat_room: { $in: [chatRoomId] } });
-
-  //     // console.log(chatMessageInRoom);
-
-  //     const chatRoom = await this.chatRoomRepository.getOne({ _id: chatRoomId });
-
-  //     let sum = 0;
-  //     let sumarray = []
-  //     let nchat = []
-  //     chatMessageInRoom.forEach(e => {
-  //       if (chatRoom._id.toString() == e.chat_room.toString()) {
-  //         sumarray.push(e._id)
-  //       }
-  //     })
-  //     while (n > 0) {
-  //       const getnchat = await this.chatMessageRepository.findOne({ _id: sumarray[sumarray.length - 1 - sum] })
-  //       nchat.push(getnchat)
-  //       sum++
-  //       n--;
-  //     }
-  //     return nchat;
-  //   }
-  //   catch (err) {
-  //     return err;
-  //   }
-
-  // }
-
   public async getLastMessageOnRooms(chatRooms: ChatRoom[]): Promise<ChatMessage[]> {
     const lastMessageList = [];
     let sortByDate = (a: any, b: any) => {
