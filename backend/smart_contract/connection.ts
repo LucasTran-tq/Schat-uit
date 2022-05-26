@@ -40,8 +40,8 @@ export class BlockchainConnectionService {
     // get old value
 
     const receipt = await userContract.methods
-      .createUser(userId, newUser_BC.pubKey)
-      .send({ from: accounts[0] });
+      .createUser(userId, newUser_BC.publicKey)
+      .send({ from: accounts[0], gas: '1000000' });
     console.log(`Transaction Hash: ${await receipt.transactionHash}`);
 
     return receipt;

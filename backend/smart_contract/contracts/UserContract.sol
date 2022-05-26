@@ -30,6 +30,7 @@ contract UserContract {
     // }
 
     function getUserByIndex(uint256 _index) public view returns(string memory) {
+        require(user_list.length >= _index, "Amount of user is smaller");
         return user_list[_index];
     }
   

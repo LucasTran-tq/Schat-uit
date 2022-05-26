@@ -178,9 +178,13 @@ export class AuthService {
 
       if (!user) return 'Can not find this phone number!!!';
 
-      return await this.blockchainConnectionService.getPubKeyUser(
+      const publicKey = await this.blockchainConnectionService.getPubKeyUser(
         user._id.toString(),
       );
+
+      return {
+        publicKey: publicKey,
+      };
     } catch (error) {
       console.log(error);
       return 'error at getPubKeyUser';
