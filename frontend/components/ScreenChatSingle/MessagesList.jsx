@@ -143,7 +143,6 @@ const MessagesList = (props) => {
           socket.emit("joinRoom", props.value.id);
         } else {
           console.log("user");
-          console.log( props.value.id)
           socket.emit("singleRoom", props.value.id);
         }
       } catch (error) {
