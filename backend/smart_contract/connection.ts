@@ -35,10 +35,6 @@ export class BlockchainConnectionService {
         UserContract.networks[networkId].address,
     );
 
-    // get old value
-    // send transaction
-    // get old value
-
     const receipt = await userContract.methods
       .createUser(userId, newUser_BC.publicKey)
       .send({ from: accounts[0], gas: '1000000' });
@@ -62,11 +58,11 @@ export class BlockchainConnectionService {
         UserContract.networks[networkId].address,
     );
 
-    console.log(userId);
+    // console.log(userId);
 
     const receipt = await userContract.methods.getUser(userId).call();
 
-    console.log(await receipt);
+    // console.log(await receipt);
     return receipt;
   }
 }

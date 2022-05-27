@@ -208,7 +208,7 @@ const InputOTPSigninScreenComponent = ({ route, navigation }) => {
         await axios
                     .post( 
                        // 'http://api.globalchain.vn:3000/auth/sms-verification',
-                       'http://172.20.1.36:3000/auth/sms-verification',
+                       'http://10.45.235.96:3000/auth/sms-verification',
                          {
                     otp: Number(otp),
                     phone_number: phoneNumber1,

@@ -18,6 +18,7 @@ $$ Server to client: Events Emit
 7. getUserByPhone => response User
 8. newRoom => response lastMessage
 9. messagesLoadMore => response message load more
+10. userPublicKey => response public key
 
 
 #Todo: Action

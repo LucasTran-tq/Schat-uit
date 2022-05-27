@@ -90,7 +90,7 @@ const ScreenPhoneInput = ({ navigation }) => {
                                     await axios
                                     .post(
                                        // 'http://api.globalchain.vn:3000/auth/login', 
-                                       'http://172.20.1.36:3000/auth/login', 
+                                       'http://10.45.235.96:3000/auth/login',
                                     {
                                         phone_number: phoneNumber,
                                     })

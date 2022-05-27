@@ -10,6 +10,8 @@ import { TwilioServices } from './twilio.service';
 import * as jwtRe from 'jsonwebtoken';
 import { User } from '../schemas/user.schema';
 import { BlockchainConnectionService } from 'smart_contract/connection';
+import { ChatRoomService } from 'src/chat/services/chat_room.service';
+import { ChatRoom } from 'src/chat/schemas/chat_room.schema';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +21,7 @@ export class AuthService {
     private readonly smsRespository: SmsRespository,
     private readonly blockchainConnectionService: BlockchainConnectionService,
     private readonly userRepository: UserRepository,
+    private readonly chatRoomService: ChatRoomService,
   ) {
     this.userRepos = userRepos;
     this.smsRespository = smsRespository;
@@ -165,8 +168,11 @@ export class AuthService {
 
       return 'Save public key successfully!';
     } catch (error) {
-      console.log(error);
-      return 'error at createNewPub';
+      console.log('error at createNewPub');
+      return {
+        message: 'error at createNewPub',
+        error: error,
+      };
     }
   }
 
@@ -186,8 +192,66 @@ export class AuthService {
         publicKey: publicKey,
       };
     } catch (error) {
-      console.log(error);
-      return 'error at getPubKeyUser';
+      console.log('error at getPubKeyUser');
+
+      return {
+        message: 'error at getPubKeyUser',
+        error: error,
+      };
+    }
+  }
+
+  public async getPubKeyUserID(userID): Promise<any> {
+    try {
+      const publicKey = await this.blockchainConnectionService.getPubKeyUser(
+        userID.toString(),
+      );
+
+      return {
+        publicKey: publicKey,
+      };
+    } catch (error) {
+      console.log('error at getPubKeyUser');
+      return {
+        message: 'error at getPubKeyUser',
+        error: error,
+      };
+    }
+  }
+
+  public async getPubKeyRoomId(accessToken, roomID): Promise<any> {
+    try {
+      let anotherUserId;
+
+      const decodeToken = await this.verifyToken(accessToken);
+      const userId = (await decodeToken)['user_id'];
+      console.log(userId);
+
+      // get room
+      const chatRoom = this.chatRoomService.getChatRoomById(roomID);
+
+      if (!chatRoom) return 'Can not find the room';
+
+      (await chatRoom).participants.map((user) => {
+        if (user._id.toString() !== userId.toString()) {
+          anotherUserId = user._id.toString();
+        }
+      });
+
+      // get another public key
+      const publicKey = await this.blockchainConnectionService.getPubKeyUser(
+        anotherUserId,
+      );
+
+      return {
+        publicKey: publicKey,
+      };
+    } catch (error) {
+      console.log('error at getPubKeyUser');
+      return {
+        message: 'error at getPubKeyUser',
+        error: error,
+      };
     }
   }
 }

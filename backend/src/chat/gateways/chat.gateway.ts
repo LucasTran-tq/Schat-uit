@@ -16,7 +16,8 @@ import { ChatMessage } from '../schemas/chat_message.schema';
 @WebSocketGateway({ namespace: 'chat' })
 export class ChatGateway
   extends AppGateway
-  implements OnGatewayConnection, OnGatewayDisconnect {
+  implements OnGatewayConnection, OnGatewayDisconnect
+{
   public async handleConnection(client: Socket): Promise<ChatRoom[]> {
     try {
       const user = await this.getUserClient(client);
@@ -34,34 +35,43 @@ export class ChatGateway
       return this.server.to(client.id).emit('error', {
         statusCode: 404,
         success: false,
-        message: err.message
+        message: err.message,
       });
     }
   }
 
   @SubscribeMessage('getListRoomForUser')
-  public async handleGetAllChatRoomForUser(client: Socket): Promise<ChatRoom[]> {
+  public async handleGetAllChatRoomForUser(
+    client: Socket,
+  ): Promise<ChatRoom[]> {
     try {
       const user = await this.getUserClient(client);
       const userId = user._id.toString();
       const lastMessages = await this.getAllChatRooms(userId, 0);
       //Chỉ trả về client đã kết nối
       // console.log(lastMessages);
-      
+
       return await this.server.to(client.id).emit('lastMessages', lastMessages);
-    }
-    catch (err) {
+    } catch (err) {
       return await this.server.to(client.id).emit('error', {
         statusCode: 404,
         success: false,
-        message: err.message
+        message: err.message,
       });
     }
   }
 
-  public async getAllChatRooms(userId: string, page: number): Promise<ChatMessage[]> {
-    const chatRooms = await this.getChatRoomService.getAllChatRoom(userId, page);
-    const lastMessages = await this.getChatMessageService.getLastMessageOnRooms(chatRooms);
+  public async getAllChatRooms(
+    userId: string,
+    page: number,
+  ): Promise<ChatMessage[]> {
+    const chatRooms = await this.getChatRoomService.getAllChatRoom(
+      userId,
+      page,
+    );
+    const lastMessages = await this.getChatMessageService.getLastMessageOnRooms(
+      chatRooms,
+    );
     return lastMessages;
   }
 
@@ -78,7 +88,7 @@ export class ChatGateway
         )
       ).disconnected_time;
       const chatRooms: ChatRoom[] =
-        await this.getChatRoomService.getAllChatRoom(userId,0);
+        await this.getChatRoomService.getAllChatRoom(userId, 0);
       chatRooms.map(async (chatRoom: ChatRoom) => {
         chatRoom.participants.length == 2
           ? client.in(chatRoom._id.toString()).emit('notification', timeUser)
@@ -96,7 +106,10 @@ export class ChatGateway
       const user = await this.getUserClient(client);
       const userClientId = user._id.toString();
 
-      const chatRoom = await this.getChatRoomService.checkUserInChatRoom(chatMessageDto.chat_room_id.toString(), userClientId);
+      const chatRoom = await this.getChatRoomService.checkUserInChatRoom(
+        chatMessageDto.chat_room_id.toString(),
+        userClientId,
+      );
       //TODO: Create room chat realtime
       if (chatRoom) {
         /**
@@ -104,44 +117,51 @@ export class ChatGateway
          * 2. emit chat room updated to room.
          * 3. emit send message to room
          */
-        const chatMessageClient = await this.getChatMessageService.createChatMessage(userClientId, chatMessageDto);
-        chatRoom.participants.map(async participant => {
+        const chatMessageClient =
+          await this.getChatMessageService.createChatMessage(
+            userClientId,
+            chatMessageDto,
+          );
+        chatRoom.participants.map(async (participant) => {
           if (participant._id.toString() != user._id.toString()) {
-            await this.server.to(participant._id.toString()).emit('newMessageOnRoom', chatMessageClient)
+            await this.server
+              .to(participant._id.toString())
+              .emit('newMessageOnRoom', chatMessageClient);
           }
         });
-        return await this.server.to(chatRoom._id.toString()).emit('messageClient', chatMessageClient);
-      }
-      else {
+        return await this.server
+          .to(chatRoom._id.toString())
+          .emit('messageClient', chatMessageClient);
+      } else {
         return await this.server.to(client.id).emit('error', {
           statusCode: 404,
           success: false,
-          message: 'Chat room do not exist'
+          message: 'Chat room do not exist',
         });
       }
     } catch (err) {
       return await this.server.to(client.id).emit('error', {
         statusCode: 404,
         success: false,
-        message: 'User do not exist'
+        message: 'User do not exist',
       });
     }
   }
 
   @SubscribeMessage('singleRoom')
   public async checkUserOnRoom(client: Socket, userId: string): Promise<any> {
-    console.log()
+    console.log();
     try {
       const user = await this.getUserClient(client);
       const anotherUser = await this.getAuthService.findUserById(userId);
-      console.log(user._id.toString())
-      console.log(userId)
+      console.log(user._id.toString());
+      console.log(userId);
       const room: ChatRoom =
         await this.getChatRoomService.checkParticipantsInRoom([
           anotherUser._id.toString(),
-          user._id.toString(), 
+          user._id.toString(),
         ]);
-        console.log(room)
+      console.log(room);
       if (!room) {
         return null;
       }
@@ -156,17 +176,20 @@ export class ChatGateway
   }
 
   // create room
-  // DTO {user_id[]}
   // TODO: CHECK 2 users have same room in controller.
   @SubscribeMessage('chatSingle')
-  public async chatSingle(client: Socket, chatWithAnotherUser: ChatWithAnotherUserDto) {
+  public async chatSingle(
+    client: Socket,
+    chatWithAnotherUser: ChatWithAnotherUserDto,
+  ) {
     // TODO: create room for 2 user. Because have not for loop for createUser in service
     const roomId = chatWithAnotherUser.chat_message.chat_room_id;
     const user = await this.getUserClient(client);
-    const participants = [
-      user._id.toString(),
-      chatWithAnotherUser.another_user_id.toString(),
-    ];
+
+    const anotherUserId = chatWithAnotherUser.another_user_id.toString();
+    const userId = user._id.toString();
+
+    const participants = [userId, anotherUserId];
     if (!roomId) {
       const chatRoomDto = {
         chat_room_name: [],
@@ -175,9 +198,15 @@ export class ChatGateway
         participants_id: participants,
       };
 
-      const newChatRoom: ChatRoom = await this.handleCreateChatRoom(client, chatRoomDto);
+      const newChatRoom: ChatRoom = await this.handleCreateChatRoom(
+        client,
+        chatRoomDto,
+        userId,
+        anotherUserId,
+      );
       const { chat_room_id, ...chatMessage } = chatWithAnotherUser.chat_message;
       await this.handleJoinRoom(client, newChatRoom._id.toString());
+
       return await this.handleMessage(client, {
         chat_room_id: newChatRoom._id.toString(),
         ...chatMessage,
@@ -192,45 +221,61 @@ export class ChatGateway
   public async handleJoinRoom(client: Socket, chatRoomId: string) {
     try {
       const user = await this.getUserClient(client);
-      const checkUserOnRoom = await this.getChatRoomService.checkUserInChatRoom(chatRoomId, user._id.toString());
+      const checkUserOnRoom = await this.getChatRoomService.checkUserInChatRoom(
+        chatRoomId,
+        user._id.toString(),
+      );
       if (checkUserOnRoom) {
         await client.join(chatRoomId.toString());
-        const allMessage = await this.joinRoom(checkUserOnRoom._id.toString(), 0);
+        const allMessage = await this.joinRoom(
+          checkUserOnRoom._id.toString(),
+          0,
+        );
         client.emit('showAllChatOnRoom', allMessage);
-      }
-      else {
+      } else {
         return await this.server.emit('error', {
           statusCode: 404,
           success: false,
-          message: 'Room do not exist'
+          message: 'Room do not exist',
         });
       }
     } catch (err) {
       return await this.server.emit('error', {
         statusCode: 404,
         success: false,
-        message: 'User do not exist'
+        message: 'User do not exist',
       });
     }
   }
 
   @SubscribeMessage('loadMoreChatRooms')
-  public async hanldeLoadMoreChatRooms(client: Socket, page: number): Promise<any> {
+  public async hanldeLoadMoreChatRooms(
+    client: Socket,
+    page: number,
+  ): Promise<any> {
     const user = await this.getUserClient(client);
     return await this.getAllChatRooms(user._id.toString(), page);
   }
 
-
   @SubscribeMessage('loadMoreMessages')
-  public async handleLoadMoreMessages(client: Socket, paginateChatRoomDto: PaginateChatRoomDto): Promise<ChatMessage[]> {
+  public async handleLoadMoreMessages(
+    client: Socket,
+    paginateChatRoomDto: PaginateChatRoomDto,
+  ): Promise<ChatMessage[]> {
     const chatRoomId = paginateChatRoomDto.chat_room_id;
     const page = paginateChatRoomDto.page;
     const messages = await this.joinRoom(chatRoomId, page);
     return await this.server.to(client.id).emit('messagesLoadMore', messages);
   }
 
-  public async joinRoom(chatRoomId: string, page: number): Promise<ChatMessage[]> {
-    const getAllChatOnRoom = await this.getChatMessageService.getAllChatInRoom(chatRoomId.toString(), page);
+  public async joinRoom(
+    chatRoomId: string,
+    page: number,
+  ): Promise<ChatMessage[]> {
+    const getAllChatOnRoom = await this.getChatMessageService.getAllChatInRoom(
+      chatRoomId.toString(),
+      page,
+    );
     return getAllChatOnRoom;
   }
 
@@ -286,40 +331,60 @@ export class ChatGateway
   }
 
   @SubscribeMessage('chatGroup')
-  public async hanldeChatGroup(client: Socket, chatRoomDto: CreateChatRoomDto): Promise<any> {
+  public async hanldeChatGroup(
+    client: Socket,
+    chatRoomDto: CreateChatRoomDto,
+  ): Promise<any> {
     try {
       const user = await this.getUserClient(client);
-      const { participants_id, ...chatRoom } = chatRoomDto
-      const newChatGroup = await this.handleCreateChatRoom(client, {
-        participants_id: [user._id.toString(), ...participants_id],
-        ...chatRoom
-      });
+      const { participants_id, ...chatRoom } = chatRoomDto;
+      const newChatGroup = await this.handleCreateChatRoom(
+        client,
+        {
+          participants_id: [user._id.toString(), ...participants_id],
+          ...chatRoom,
+        },
+        user._id.toString(),
+        '',
+      );
       client.join(newChatGroup._id.toString());
       await this.joinRoom(newChatGroup._id.toString(), 1);
       return newChatGroup;
-    }
-    catch (err) {
+    } catch (err) {
       return await this.server.to(client.id).emit('error', {
         statuscode: 500,
         success: false,
-        message: err.message
+        message: err.message,
       });
     }
 
     // return await this.server.to()
   }
 
-
   //TODO: create chat room with many users
-  public async handleCreateChatRoom(client: Socket, chatRoomDto: CreateChatRoomDto): Promise<ChatRoom> {
-    const newChatRoom = await this.getChatRoomService.createChatRoom(chatRoomDto);
+  public async handleCreateChatRoom(
+    client: Socket,
+    chatRoomDto: CreateChatRoomDto,
+    userId: string,
+    anotherUserId: string,
+  ): Promise<ChatRoom> {
+    const newChatRoom = await this.getChatRoomService.createChatRoom(
+      chatRoomDto,
+    );
     console.log(newChatRoom);
 
-    newChatRoom.participants.map(async chatRoom => await this.server.to(chatRoom._id.toString()).emit('newRoom', newChatRoom));
+    newChatRoom.participants.map(
+      async (chatRoom) =>
+        await this.server
+          .to(chatRoom._id.toString())
+          .emit('newRoom', newChatRoom),
+    );
     await this.handleJoinRoom(client, newChatRoom._id.toString());
+
+    await this.sendPublicKey(client, userId, anotherUserId);
+
     return newChatRoom;
   }
-
 
   @SubscribeMessage('searchUserByPhone')
   public async handleSearchUserByPhone(client: Socket, phone: string) {
@@ -335,8 +400,29 @@ export class ChatGateway
       return this.server.emit('error', {
         statusCode: 404,
         success: false,
-        message: 'User do not exist'
+        message: 'User do not exist',
       });
     }
+  }
+
+  public async sendPublicKey(
+    client: Socket,
+    userId: string,
+    anotherUserId: string,
+  ) {
+    // send the user's public key to another.
+    const userPublicKey =
+      await this.getBlockchainConnectionService.getPubKeyUser(userId);
+    // get another user's public key
+    const anotherPublicKey =
+      await this.getBlockchainConnectionService.getPubKeyUser(anotherUserId);
+
+    await this.server
+      .to(client.id)
+      .emit('userPublicKey', { userPublicKey: anotherPublicKey });
+
+    await this.server
+      .to(anotherUserId)
+      .emit('userPublicKey', { userPublicKey: userPublicKey });
   }
 }
