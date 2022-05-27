@@ -86,7 +86,7 @@ const MessagesList = (props) => {
               };
               switch (item.message_type) {
                 case 3:
-                  temp.image = 'http://172.20.1.36:3000/streaming-file/get-file/' + item.message_content;
+                  temp.image = 'http://localhost:3000/streaming-file/get-file/' + item.message_content;
                   break;
                 case 4:
                   temp.video = item.message_content;
@@ -125,7 +125,7 @@ const MessagesList = (props) => {
 
           switch (message.message_type) {
             case 3:
-              temp.image = 'http://172.20.1.36:3000/streaming-file/get-file/' + message.message_content;
+              temp.image = 'http://localhost:3000/streaming-file/get-file/' + message.message_content;
               console.log(temp.image);
               break;
             case 4:

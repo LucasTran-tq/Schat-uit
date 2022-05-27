@@ -36,7 +36,7 @@ export default function ListChat({ navigation }) {
         console.log("null")
         const socket1 = io(
           //"http://api.globalchain.vn:3000/chat",
-          "http://localhost:3000/chat",
+          "http://10.45.235.96:3000/chat",
         {
           extraHeaders: {
             Authorization: "Bearer " + accessToken,
