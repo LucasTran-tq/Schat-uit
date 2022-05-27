@@ -35,9 +35,11 @@ export const SetPublicKey = (pub) => {
     }
 }
 
-export const SetListKey = (pub) => {
+export const SetListKey = (key) => {
     return {
-        type: SET_LISTKEY_KEY,
-        payload: pub
+        type: SET_LIST_KEY,
+        payload: key
     }
 }
+
+

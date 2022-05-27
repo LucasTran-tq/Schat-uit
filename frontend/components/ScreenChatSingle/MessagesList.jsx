@@ -56,7 +56,7 @@ const MessagesList = (props) => {
 
   useEffect(() => {
     // alo()
-    const fetchData = async () => {
+    const fetchData = () => {
       try {
         if (isListenChat) {
           console.log("Off");
@@ -66,8 +66,6 @@ const MessagesList = (props) => {
         socket.on("showAllChatOnRoom", (data) => {
           console.log("/////////////////////////////////////////");
           console.log("show all");
-          // console.log(data)
-          // console.log(typeof data)
           if (typeof data != "string" && data.length > 0) {
             console.log("exist data");
             setHasData(true)
@@ -112,7 +110,6 @@ const MessagesList = (props) => {
           idRoom = message.chat_room._id;
           setHasData(true)
           length++;
-          console.log("new mes 11111");
           const temp = {
             _id: message._id,
             createdAt: message.message_time,
