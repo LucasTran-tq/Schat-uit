@@ -22,7 +22,7 @@ async function bootstrap() {
 
   //Swagger Api
   const config = new DocumentBuilder()
-    .setTitle('Robert Phi')
+    .setTitle('SChat')
     .setDescription('API Schat documentation')
     .setVersion('1.0')
     .build();

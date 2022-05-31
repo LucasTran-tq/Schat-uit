@@ -69,6 +69,8 @@ import { PostManagementGateway } from './post_management/gateways/post_managemen
 import { StreamingFileController } from './streaming-file/streaming-file.controller';
 import { StreamingFileService } from './streaming-file/streaming-file.service';
 import { BlockchainConnectionService } from 'smart_contract/connection';
+import { ChatController } from './chat/chat.controller';
+import { CryptoFileService } from './chat/services/crypto_file_ipfs';
 
 require('dotenv').config();
 
@@ -112,6 +114,7 @@ require('dotenv').config();
   controllers: [
     AppController,
     AuthController,
+    ChatController,
     ChatMessageController,
     ChatRoomController,
     TaskManagermentController,
@@ -136,6 +139,7 @@ require('dotenv').config();
 
     //ChatMesage
     ChatMessageService,
+    CryptoFileService,
 
     //TaskManagerment
     FieldService,
