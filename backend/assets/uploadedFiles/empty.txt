@@ -1,0 +1,1 @@
+This file is here to keep uploadedFiles directory can not be removed by .gitignore
