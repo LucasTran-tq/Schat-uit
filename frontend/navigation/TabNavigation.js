@@ -22,7 +22,7 @@ export default function TabNavigation() {
                 tabBarLabelStyle: {
                     fontSize: 14,
                     textTransform: 'none',
-                    fontFamily: 'roboto-regular',
+                    fontFamily: 'System',
                     lineHeight: 16,
                     color: '#1B1B1B',
                 },
@@ -61,7 +61,7 @@ export function WordDetailsNavigation() {
                 tabBarLabelStyle: {
                     fontSize: 14,
                     textTransform: 'none',
-                    fontFamily: 'roboto-regular',
+                    fontFamily: 'System',
                     margin: 20,
                     overflow: 'hidden',
                 },

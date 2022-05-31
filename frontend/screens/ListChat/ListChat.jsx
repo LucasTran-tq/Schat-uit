@@ -20,7 +20,6 @@ import { LoadSocket, ListenFindUser } from "../../store/actions/socket.action";
 export default function ListChat({ navigation }) {
   const { accessToken, id} = useSelector((state) => state.userReducer);
   const { socket, isListenFindUser } = useSelector((state) => state.socketReducer);
-  const { rooms } = useSelector((state) => state.socketReducer);
   const dispatch = useDispatch();
 
 
@@ -36,7 +35,7 @@ export default function ListChat({ navigation }) {
         console.log("null")
         const socket1 = io(
           //"http://api.globalchain.vn:3000/chat",
-          "http://10.45.235.96:3000/chat",
+          "http://localhost:3000/chat",
         {
           extraHeaders: {
             Authorization: "Bearer " + accessToken,
