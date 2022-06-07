@@ -8,7 +8,7 @@ import { SetPrivatekey, SetPublicKey } from '../../store/actions/auth.action'
 import * as SecureStore from 'expo-secure-store'
 import axios from "axios";
 
-const crypto = require("crypto-js");
+// const crypto = require("crypto-js");
 var EC = require("elliptic-expo").ec;
 var ec = new EC("curve25519");
 
@@ -21,19 +21,19 @@ function SignupSuccessScreen({ navigation }) {
         var key1 = ec.genKeyPair();
         var pri = key1.getPrivate("hex")
         var pub = key1.getPublic("hex")
-        // SecureStore.setItemAsync(
-        //     'pri',
-        //     pri
-        // )
+        SecureStore.setItemAsync(
+            'pri',
+            pri
+        )
         dispatch(SetPrivatekey(pri))
 
-        // axios.post('http://localhost:3000/auth/blockchain/createNewPub', {
-        //     publicKey: pub
-        //   }, {
-        //     headers: {
-        //       'Authorization': `Basic ${accessToken}` 
-        //     }
-        //   })
+        axios.post('http://localhost:3000/auth/blockchain/createNewPub', {
+            publicKey: pub
+          }, {
+            headers: {
+              'Authorization': `Basic ${accessToken}` 
+            }
+          })
 
       }, []);
     return (

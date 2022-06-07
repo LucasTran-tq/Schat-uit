@@ -15,6 +15,7 @@ import { GiftedChat, Send } from "react-native-gifted-chat";
 import EmojiSelector, { Categories } from "react-native-emoji-selector";
 import { Ionicons, Entypo } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import axios from "axios";
 
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
@@ -23,24 +24,40 @@ import { Video } from "expo-av";
 import { useDispatch, useSelector } from "react-redux";
 import { ListenChat, ListenNewMess } from "../../store/actions/socket.action";
 
+const crypto = require("crypto-js");
+var EC = require("elliptic-expo").ec;
+var ec = new EC("curve25519");
+
+
+
 const MessagesList = (props) => {
-  const { id } = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  const { accessToken, id, priKey } = useSelector((state) => state.userReducer);
   const { socket, isListenChat, isListenNewMess } = useSelector(
     (state) => state.socketReducer
   );
   const [messages, setMessages] = useState([]);
-  let length = 0;
-  let idRoom = props.value.id;
-  const dispatch = useDispatch();
-
   const [emoji, setEmoji] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [heightValue, setHeightValue] = useState(new Animated.Value(70));
   const [image, setImage] = useState(null);
   const [hasData, setHasData] = useState(false)
-
+  // const [shareKey, setShareKey] = useState("")
   const addMessage = (newMessage) =>
     setMessages((state) => [...state, newMessage]);
+
+  let length = 0;
+  let idRoom = props.value.id;
+  let shareKey = ""
+  let baseURL = ""
+  if(props.value.type == 1){
+    baseURL = `http://localhost:3000/auth/blockchain/getPubKeyRoomId/` + props.value.id;
+  }
+  else {
+    baseURL = `http://localhost:3000/auth/blockchain/getPubKeyUserID/` + props.value.id;
+  }
+
+  const myKey = ec.keyFromPrivate(priKey,"hex")
 
   useEffect(() => {
     showEmojis();
@@ -54,9 +71,31 @@ const MessagesList = (props) => {
     }).start();
   };
 
+  function encrypt(text, password) {
+    var result = crypto.AES.encrypt(text, password);
+    return result.toString();
+  }
+
+  function decrypt(enText, password) {
+    const result = crypto.AES.decrypt(enText, password);
+    var textDecrypt = result.toString(crypto.enc.Utf8)
+    return textDecrypt;
+  }
+
   useEffect(() => {
-    // alo()
-    const fetchData = async () => {
+    const getPub = async() => {
+      await axios
+        .get(baseURL, { headers: { Authorization: "Bearer " + accessToken } })
+        .then((response) => {
+          let key = ec.keyFromPublic(response.data.publicKey,"hex")
+          shareKey = myKey.derive(key.getPublic()).toString()
+        })
+    }
+    getPub();
+  },[props.value.id])
+
+  useEffect(() => {
+    const fetchData = () => {
       try {
         if (isListenChat) {
           console.log("Off");
@@ -92,7 +131,7 @@ const MessagesList = (props) => {
                   temp.video = item.message_content;
                   break;
                 default:
-                  temp.text = item.message_content;
+                  temp.text = decrypt(item.message_content,shareKey);
               }
               addMessage(temp);
             });
@@ -132,7 +171,7 @@ const MessagesList = (props) => {
               temp.video = message.message_content;
               break;
             default:
-              temp.text = message.message_content;
+              temp.text = decrypt(message.message_content,shareKey);
           }
           addMessage(temp);
           dispatch(ListenNewMess(true));
@@ -149,18 +188,20 @@ const MessagesList = (props) => {
         console.log(error);
       }
     };
+    
     fetchData();
-  }, []);
+  }, [props.value.id]);
 
   
   const onSend = useCallback((message = [],typeMes = 0) => {
     console.log(message)
+    console.log(hasData)
     if (hasData && props.value.type == 2) {
       const newMes = {
         another_user_id: props.value.id,
         chat_message: {
           message_type: typeMes,
-          message_content: message,
+          message_content: encrypt(message, shareKey),
           chat_room_id: false,
         },
       };
@@ -169,7 +210,7 @@ const MessagesList = (props) => {
     } else {
       const newMes = {
         message_type: typeMes,
-        message_content: message,
+        message_content: encrypt(message, shareKey),
         chat_room_id: idRoom,
       };
       console.log(newMes);
@@ -271,9 +312,6 @@ const MessagesList = (props) => {
       const extfileName = result.name.split(".").pop();
       const checkType = extfileName == "mp4" ? 4 : 3;
       const mesContent = result.name + ";base64;" + fileToBase64;
-      console.log("length: " + length)
-      console.log("type: " + props.value.type)
-      console.log("data: " + hasData)
       onSend(mesContent,checkType)
     } catch (err) {
       console.log(err);
