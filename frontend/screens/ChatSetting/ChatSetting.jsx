@@ -22,10 +22,10 @@ const { width, height } = Dimensions.get('window')
 const ChatSetting = () => {
     const navigation = useNavigation()
     return (
-        <ScrollView>
-            <StatusBar style='light' />
-            <ImageBackground
-                source={require('../../assets/images/bg-image.jpg')}
+        <View>
+            {/* <View>
+                <ImageBackground
+                source={require("../../assets/images/ListChat/MaskGroup.png")}
                 style={ChatSettingTheme.backgroundImage}
                 resizeMode='cover'
             >
@@ -34,9 +34,32 @@ const ChatSetting = () => {
                     style={ChatSettingTheme.imgBackgroundContainer}
                 >
                     <AntDesign name='left' size={24} color='#fff' />
-                    <Text style={ChatSettingTheme.textProfile}>Hồ sơ</Text>
+                    <Text style={ChatSettingTheme.textProfile}>Tin nhắn</Text>
                 </TouchableOpacity>
             </ImageBackground>
+            </View> */}
+
+            <View >
+            <ImageBackground
+          source={require("../../assets/images/ListChat/MaskGroup.png")}
+          style={ChatSettingTheme.backgroundImage}
+        >
+          <View style={ChatSettingTheme.BoxTop}>
+            <TouchableOpacity
+                        onPress={() => navigation.goBack()}
+                        // style={ChatHeaderTheme.imgBackgroundContainer}
+                    >
+                        <AntDesign name='left' size={24} color='#fff' />
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
+
+        
+          </View>
+            
+            <ScrollView>
+            {/* <StatusBar style='light' /> */}
+            
 
             <SafeAreaView style={ChatSettingTheme.container}>
                 <View style={ChatSettingTheme.headerContainer}>
@@ -88,6 +111,8 @@ const ChatSetting = () => {
                 </View>
             </SafeAreaView>
         </ScrollView>
+        </View>
+        
     )
 }
 

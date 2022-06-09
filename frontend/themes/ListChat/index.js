@@ -135,6 +135,7 @@ const index = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     margin: 10,
+    marginLeft:20
   },
   iconList: {},
   ListBoxChat: {
@@ -142,6 +143,7 @@ const index = StyleSheet.create({
     alignItems: "center",
     //justifyContent: "space-evenly",
     backgroundColor: "#FFFFFF",
+    borderRadius: 20,
   },
   IconAvatar: {
     backgroundColor: "#1E73B9",
@@ -151,6 +153,7 @@ const index = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     margin: 10,
+    marginLeft: 20,
   },
   ChatRoomName: {
     fontSize: 15,
@@ -208,6 +211,7 @@ const index = StyleSheet.create({
   },
   TimeChat: {
     flex: 1,
+    margin: 10
   },
   BoxSilent: {
     flex: 1,

@@ -42,6 +42,7 @@ const MessagesList = (props) => {
   const [heightValue, setHeightValue] = useState(new Animated.Value(70));
   const [image, setImage] = useState(null);
   const [hasData, setHasData] = useState(false)
+  const [hasKey, setHasKey] = useState(false)
   // const [shareKey, setShareKey] = useState("")
   const addMessage = (newMessage) =>
     setMessages((state) => [...state, newMessage]);
@@ -58,6 +59,7 @@ const MessagesList = (props) => {
   }
 
   const myKey = ec.keyFromPrivate(priKey,"hex")
+
 
   useEffect(() => {
     showEmojis();
@@ -89,6 +91,8 @@ const MessagesList = (props) => {
         .then((response) => {
           let key = ec.keyFromPublic(response.data.publicKey,"hex")
           shareKey = myKey.derive(key.getPublic()).toString()
+          console.log("key")
+          setHasKey(true)
         })
     }
     getPub();
@@ -190,7 +194,7 @@ const MessagesList = (props) => {
     };
     
     fetchData();
-  }, [props.value.id]);
+  }, []);
 
   
   const onSend = useCallback((message = [],typeMes = 0) => {

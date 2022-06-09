@@ -261,7 +261,7 @@ export default function ListChat({ navigation }) {
   const renderContent = () => {
     return (
       <View style={index.Content}>
-        <View>
+        {/* <View>
           <View style={index.PhoneBook}>
             <View>
               <View style={index.BoxPhoneBook}>
@@ -281,14 +281,14 @@ export default function ListChat({ navigation }) {
               <Text>Danh bạ</Text>
             </View>
           </View>
-        </View>
+        </View> */}
         <View style={index.MenuBody}>
           <Text>Tất cả tin nhắn</Text>
-          <Image
+          {/* <Image
             source={require("../../assets/images/ListChat/list.png")}
             style={index.iconList}
-          />
-          <Text>Chưa đọc</Text>
+          /> */}
+          {/* <Text></Text> */}
         </View>
 
         <View style={index.listFriend}>

@@ -9,8 +9,19 @@ const ChatSettingTheme = StyleSheet.create({
         backgroundColor: '#fff',
     },
     backgroundImage: {
-        backgroundColor: '#0D76C1',
+        // width: "100%",
+        // height: "100%",
+        // flex: 1,
+        backgroundColor: "#27AAE1",
     },
+    BoxTop: {
+        height: "40%",
+        marginTop: "2%",
+        marginHorizontal: "3%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+      },
     imgBackgroundContainer: {
         flexDirection: 'row',
         marginTop: height * 0.0178571428571429,
