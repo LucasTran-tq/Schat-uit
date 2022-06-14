@@ -1,4 +1,4 @@
-import { LOAD_ROOMS, LOAD_MESSAGES, LOAD_SOCKET, IS_LISTEN_CHAT, IS_LISTEN_NEW_MESS, IS_LISTEN_FIND_USER, LOAD_SOCKET_TASK } from "../contants/socket.contant"
+import { LOAD_ROOMS, LOAD_MESSAGES, LOAD_SOCKET, IS_LISTEN_CHAT, IS_LISTEN_NEW_MESS, IS_LISTEN_FIND_USER, IS_LISTEN_NEW_ROOM, LOAD_SOCKET_TASK } from "../contants/socket.contant"
 
 const initialState = {
     rooms: [],
@@ -8,6 +8,7 @@ const initialState = {
     isListenNewMess: false,
     isListenFindUser: false,
     socketTask: null,
+    isListenNewRoom: false,
 }
 
 const socketReducer = (state = initialState, action) => {
@@ -32,6 +33,9 @@ const socketReducer = (state = initialState, action) => {
             return { ...state }
         case LOAD_SOCKET_TASK:
             state.socketTask = action.payload
+            return { ...state }
+        case IS_LISTEN_NEW_ROOM:
+            state.isListenNewRoom = action.payload
             return { ...state }
         default:
             return { ...state }

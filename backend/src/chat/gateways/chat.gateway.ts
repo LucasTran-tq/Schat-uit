@@ -124,9 +124,11 @@ export class ChatGateway
           );
         chatRoom.participants.map(async (participant) => {
           if (participant._id.toString() != user._id.toString()) {
+            console.log(chatMessageClient)
             await this.server
               .to(participant._id.toString())
               .emit('newMessageOnRoom', chatMessageClient);
+            
           }
         });
         return await this.server

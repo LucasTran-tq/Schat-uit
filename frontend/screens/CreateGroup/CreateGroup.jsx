@@ -66,6 +66,7 @@ export default function CreateGroup({ navigation }) {
         console.log("not exist")
         socket.on("newRoom", (data) => {
             console.log("/////////////////////////////////////////");
+            console.log("data")
             console.log(data)
             const value = {
               id : data._id,

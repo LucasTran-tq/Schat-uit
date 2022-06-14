@@ -72,10 +72,17 @@ import { BlockchainConnectionService } from 'smart_contract/connection';
 import { ChatController } from './chat/chat.controller';
 import { CryptoFileService } from './chat/services/crypto_file_ipfs';
 
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+
 require('dotenv').config();
 
 @Module({
   imports: [
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'public/assets/decryptedFiles'),
+    //   renderPath: 'public'
+    // }),
     MorganModule,
     MongooseModule.forRoot(process.env.DATABASE_CONNECTION_Lucas),
     ConfigModule.forRoot({
