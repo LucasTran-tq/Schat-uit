@@ -14,7 +14,7 @@ import * as SecureStore from 'expo-secure-store'
 import { index } from '../../themes/WaittingScreen/index'
 
 import { useDispatch } from 'react-redux';
-import { SetAccessToken, SetIdUser } from "../../store/actions/auth.action";
+import { SetAccessToken, SetIdUser, SetPrivatekey } from "../../store/actions/auth.action";
 
 
 
@@ -31,6 +31,11 @@ const ScreenWait = ({ navigation }) => {
             SecureStore.getItemAsync('idUser').then((value) => {
                 if (value != null) {
                     dispatch(SetIdUser(value))
+                }
+            })
+            SecureStore.getItemAsync('pri').then((value) => {
+                if (value != null) {
+                    dispatch(SetPrivatekey(value))
                 }
             })
             SecureStore.getItemAsync('accessToken').then((value) => {

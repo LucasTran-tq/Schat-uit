@@ -25,7 +25,7 @@ export default function ListChat({ navigation }) {
 
   const [dataRooms, setDataRooms] = useState([]);
   const [isBusy, setIsBusy] = useState(true)
-
+ 
   const addRoom = (newRoom) => setDataRooms(state => [...state, newRoom])
   useEffect(() => {
     try {
@@ -73,10 +73,10 @@ export default function ListChat({ navigation }) {
                     time = diffValue + " ngày"
                   }
                   if(item.last_message.user._id == id){
-                    message_content = "Bạn: " + item.last_message.message_content.slice(0,30)
+                    message_content = "Bạn: Đã gửi 1 tin nhắn" 
                   }
                   else{
-                    message_content = item.last_message.message_content.slice(0,30)
+                    message_content = item.last_message.user.user_name + ": Đã gửi 1 tin nhắn"
                   }
                   if(user._id != id){              
                     const temp = {
@@ -124,8 +124,6 @@ export default function ListChat({ navigation }) {
                   addRoom(temp)
               }
             });
-            console.log( moment()) 
-            console.log("///success")  
           }catch(error){
             console.log(error)
           }     
@@ -261,7 +259,7 @@ export default function ListChat({ navigation }) {
   const renderContent = () => {
     return (
       <View style={index.Content}>
-        <View>
+        {/* <View>
           <View style={index.PhoneBook}>
             <View>
               <View style={index.BoxPhoneBook}>
@@ -281,14 +279,14 @@ export default function ListChat({ navigation }) {
               <Text>Danh bạ</Text>
             </View>
           </View>
-        </View>
+        </View> */}
         <View style={index.MenuBody}>
           <Text>Tất cả tin nhắn</Text>
-          <Image
+          {/* <Image
             source={require("../../assets/images/ListChat/list.png")}
             style={index.iconList}
-          />
-          <Text>Chưa đọc</Text>
+          /> */}
+          {/* <Text></Text> */}
         </View>
 
         <View style={index.listFriend}>

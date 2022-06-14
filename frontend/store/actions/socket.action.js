@@ -1,4 +1,4 @@
-import { LOAD_ROOMS, LOAD_MESSAGES, LOAD_SOCKET, IS_LISTEN_CHAT, IS_LISTEN_NEW_MESS, IS_LISTEN_FIND_USER ,LOAD_SOCKET_TASK } from "../contants/socket.contant"
+import { LOAD_ROOMS, LOAD_MESSAGES, LOAD_SOCKET, IS_LISTEN_CHAT, IS_LISTEN_NEW_MESS, IS_LISTEN_FIND_USER ,IS_LISTEN_NEW_ROOM,LOAD_SOCKET_TASK } from "../contants/socket.contant"
 
 export const LoadChatRooms = (rooms) => {
     return {
@@ -54,6 +54,13 @@ export const LoadSocketTask= (socket) => {
     }
 }
 
+export const ListenNewRoom= (bool) => {
+    console.log("Listen new room")
+    return {
+        type: IS_LISTEN_NEW_ROOM,
+        payload: bool
+    }
+}
 
 
 

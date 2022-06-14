@@ -34,7 +34,7 @@ const Header = () => {
         />
 
         <View style={styles.txtContainer}>
-          <Text style={styles.txtName}>Gsoft Group</Text>
+          <Text style={styles.txtName}>User</Text>
           <Text style={styles.txtTime}>Truy cập 2 giờ trước</Text>
         </View>
       </View>

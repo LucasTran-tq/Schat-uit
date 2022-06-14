@@ -32,6 +32,8 @@ export class ChatController {
   @UseInterceptors(FilesInterceptor('files', 20, multerOptions))
   public async uploadFile(@UploadedFiles() files: Array<Express.Multer.File>) {
     try {
+      console.log("files")
+      console.log(files)
       files.forEach(async (element) => {
         const fileName = element.filename;
         console.log(files);

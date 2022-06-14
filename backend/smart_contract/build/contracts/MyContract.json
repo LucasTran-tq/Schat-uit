@@ -2,41 +2,40 @@
   "contractName": "MyContract",
   "abi": [
     {
-      "constant": true,
       "inputs": [],
       "name": "data",
       "outputs": [
         {
+          "internalType": "uint256",
           "name": "",
           "type": "uint256"
         }
       ],
-      "payable": false,
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
-      "constant": false,
       "inputs": [
         {
+          "internalType": "uint256",
           "name": "_data",
           "type": "uint256"
         }
       ],
       "name": "setData",
       "outputs": [],
-      "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_data\",\"type\":\"uint256\"}],\"name\":\"setData\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"data\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/MyContract.sol\":\"MyContract\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/MyContract.sol\":{\"keccak256\":\"0x9c79293c3d4d875d917d48976653656efb82a8228d75857cb2fac5ab3c7f90bf\",\"urls\":[\"bzzr://5683f93f8395ba83aac8b8da26617be1c39901539a6a1b6776f976c4338940bd\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5060e38061001f6000396000f3fe6080604052600436106043576000357c0100000000000000000000000000000000000000000000000000000000900480635b4b73a914604857806373d4a13a14607f575b600080fd5b348015605357600080fd5b50607d60048036036020811015606857600080fd5b810190808035906020019092919050505060a7565b005b348015608a57600080fd5b50609160b1565b6040518082815260200191505060405180910390f35b8060008190555050565b6000548156fea165627a7a72305820f3c1dad9f8d9197342a6a056786f40d5cf9f4a78272571afe4ac6b814a15e6fe0029",
-  "deployedBytecode": "0x6080604052600436106043576000357c0100000000000000000000000000000000000000000000000000000000900480635b4b73a914604857806373d4a13a14607f575b600080fd5b348015605357600080fd5b50607d60048036036020811015606857600080fd5b810190808035906020019092919050505060a7565b005b348015608a57600080fd5b50609160b1565b6040518082815260200191505060405180910390f35b8060008190555050565b6000548156fea165627a7a72305820f3c1dad9f8d9197342a6a056786f40d5cf9f4a78272571afe4ac6b814a15e6fe0029",
-  "sourceMap": "25:112:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:112:1;;;;;;;",
-  "deployedSourceMap": "25:112:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;70:61;;8:9:-1;5:2;;;30:1;27;20:12;5:2;70:61:1;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;70:61:1;;;;;;;;;;;;;;;;;:::i;:::-;;49:16;;8:9:-1;5:2;;;30:1;27;20:12;5:2;49:16:1;;;:::i;:::-;;;;;;;;;;;;;;;;;;;70:61;121:5;114:4;:12;;;;70:61;:::o;49:16::-;;;;:::o",
-  "source": "pragma solidity ^0.5.0;\n\ncontract MyContract {\n  uint public data;\n\n  function setData(uint _data) external {\n    data = _data;\n  }\n\n  \n}\n",
-  "sourcePath": "/Users/lucas/Lucas_UIT/UIT 2022 - HK6/Programming on mobile devices/SChat-UIT/Schat-uit/backend/smart_contract/contracts/MyContract.sol",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.0+commit.26b70077\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"data\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_data\",\"type\":\"uint256\"}],\"name\":\"setData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/MyContract.sol\":\"MyContract\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/MyContract.sol\":{\"keccak256\":\"0xe9ae9f155b1ba5822ba12d26bf261f85a06cd271d0c19e5af9a542e22391dcd3\",\"urls\":[\"bzz-raw://193fb9a1bb140d67ad23180592b572cfa61cd4a0c23dc6ee8cbe3525a005416c\",\"dweb:/ipfs/QmTghUQY5BVSm6D7zjBpAePsF3g5iiA9mTQSTPNAANgYaR\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060c48061001f6000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c80635b4b73a914603757806373d4a13a146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b60686088565b6040518082815260200191505060405180910390f35b8060008190555050565b6000548156fea264697066735822122065d27712dfc7ab9906422c25bcae88f0f080683ba5d765569910a53cc5ec8e8864736f6c63430006000033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c80635b4b73a914603757806373d4a13a146062575b600080fd5b606060048036036020811015604b57600080fd5b8101908080359060200190929190505050607e565b005b60686088565b6040518082815260200191505060405180910390f35b8060008190555050565b6000548156fea264697066735822122065d27712dfc7ab9906422c25bcae88f0f080683ba5d765569910a53cc5ec8e8864736f6c63430006000033",
+  "sourceMap": "25:112:1:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:112:1;;;;;;;",
+  "deployedSourceMap": "25:112:1:-:0;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:112:1;;;;;;;;;;;;;;;;;;;;;;;;70:61;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;70:61:1;;;;;;;;;;;;;;;;;:::i;:::-;;49:16;;;:::i;:::-;;;;;;;;;;;;;;;;;;;70:61;121:5;114:4;:12;;;;70:61;:::o;49:16::-;;;;:::o",
+  "source": "pragma solidity ^0.6.0;\n\ncontract MyContract {\n  uint public data;\n\n  function setData(uint _data) external {\n    data = _data;\n  }\n\n  \n}\n",
+  "sourcePath": "/Users/huuphat/Desktop/SChat-UIT/Schat-uit/backend/smart_contract/contracts/MyContract.sol",
   "ast": {
     "absolutePath": "project:/contracts/MyContract.sol",
     "exportedSymbols": {
@@ -52,13 +51,14 @@
         "literals": [
           "solidity",
           "^",
-          "0.5",
+          "0.6",
           ".0"
         ],
         "nodeType": "PragmaDirective",
         "src": "0:23:1"
       },
       {
+        "abstract": false,
         "baseContracts": [],
         "contractDependencies": [],
         "contractKind": "contract",
@@ -73,9 +73,11 @@
         "nodes": [
           {
             "constant": false,
+            "functionSelector": "73d4a13a",
             "id": 40,
             "name": "data",
             "nodeType": "VariableDeclaration",
+            "overrides": null,
             "scope": 51,
             "src": "49:16:1",
             "stateVariable": true,
@@ -152,12 +154,14 @@
               ]
             },
             "documentation": null,
+            "functionSelector": "5b4b73a9",
             "id": 50,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "setData",
             "nodeType": "FunctionDefinition",
+            "overrides": null,
             "parameters": {
               "id": 43,
               "nodeType": "ParameterList",
@@ -167,6 +171,7 @@
                   "id": 42,
                   "name": "_data",
                   "nodeType": "VariableDeclaration",
+                  "overrides": null,
                   "scope": 50,
                   "src": "87:10:1",
                   "stateVariable": false,
@@ -200,7 +205,7 @@
             "scope": 51,
             "src": "70:61:1",
             "stateMutability": "nonpayable",
-            "superFunction": null,
+            "virtual": false,
             "visibility": "external"
           }
         ],
@@ -225,7 +230,7 @@
           "literals": [
             "solidity",
             "^",
-            "0.5",
+            "0.6",
             ".0"
           ]
         },
@@ -235,6 +240,7 @@
       },
       {
         "attributes": {
+          "abstract": false,
           "baseContracts": [
             null
           ],
@@ -254,7 +260,9 @@
           {
             "attributes": {
               "constant": false,
+              "functionSelector": "73d4a13a",
               "name": "data",
+              "overrides": null,
               "scope": 51,
               "stateVariable": true,
               "storageLocation": "default",
@@ -280,6 +288,7 @@
           {
             "attributes": {
               "documentation": null,
+              "functionSelector": "5b4b73a9",
               "implemented": true,
               "isConstructor": false,
               "kind": "function",
@@ -287,9 +296,10 @@
                 null
               ],
               "name": "setData",
+              "overrides": null,
               "scope": 51,
               "stateMutability": "nonpayable",
-              "superFunction": null,
+              "virtual": false,
               "visibility": "external"
             },
             "children": [
@@ -299,6 +309,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_data",
+                      "overrides": null,
                       "scope": 50,
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -412,24 +423,18 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+    "version": "0.6.0+commit.26b70077.Emscripten.clang"
   },
   "networks": {
-    "4": {
-      "events": {},
-      "links": {},
-      "address": "0x3da0C37B65950D44B4B98131Da2b1b6C256BaDC0",
-      "transactionHash": "0x2a4a70136bd3c4cb9fc9f84cdad6f68a4f31283adf4026c7f084e3069357eb95"
-    },
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x6E9379BccBe6B37D73d6337623C93FdeC3603FF0",
-      "transactionHash": "0x43de8d942a6e5e2e151892a00d30bacce0790004b7ca6e68276d0168ae1e3bbb"
+      "address": "0xDEC2Ec32e9885664547150CFf350C975589625e9",
+      "transactionHash": "0x04d724c35b2c173baf21ba5322b463c15a28eaec34d163af5a1ba07b692b8162"
     }
   },
-  "schemaVersion": "3.4.7",
-  "updatedAt": "2022-06-04T07:45:47.926Z",
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2022-06-09T03:24:26.880Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
