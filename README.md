@@ -50,7 +50,7 @@ SChat use the following technologies, frameworks and development techniques:
 
 
 ## Features
-A few of the things you can do with Real Estate Business System:
+Features on Schat:
 - Log in
 - Registration
 - Encrypted chat
