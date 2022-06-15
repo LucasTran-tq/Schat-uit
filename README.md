@@ -24,10 +24,10 @@ This is the [Software Requirements Document](https://drive.google.com/file/d/1Jl
 
 
 
-<img width="400" alt="image1" src="assets/waitting.png" hspace="20"><img width="400" alt="image2" src="assets/listchat.png">
-<img width="400" alt="image3" src="assets/signupname.png" hspace="20"><img width="400" alt="image4" src="assets/signupphone.png">
-<img width="400" alt="image5" src="assets/otp.png" hspace="20"><img width="400" alt="image6" src="assets/signupsuccess.png">
-<img width="400" alt="image7" src="assets/login.png" hspace="20"><img width="400" alt="image8" src="assets/messageslist.png">
+<img width="300" alt="image1" src="assets/waitting.png" hspace="20"><img width="300" alt="image2" src="assets/listchat.png">
+<img width="300" alt="image3" src="assets/signupname.png" hspace="20"><img width="300" alt="image4" src="assets/signupphone.png">
+<img width="300" alt="image5" src="assets/otp.png" hspace="20"><img width="300" alt="image6" src="assets/signupsuccess.png">
+<img width="300" alt="image7" src="assets/login.png" hspace="20"><img width="300" alt="image8" src="assets/messageslist.png">
 
 
 ## Video Demo
