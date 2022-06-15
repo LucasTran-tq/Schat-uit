@@ -31,7 +31,7 @@ This is the [Software Requirements Document](https://drive.google.com/file/d/1Jl
 
 
 ## Video Demo
-You can have a look with SChat through [the video](https://drive.google.com/drive/u/0/folders/1SaTlcxTALEDZW8POoL1kdV8quoATb7BL).
+You can have a look with SChat through [the video](https://drive.google.com/file/d/1z95rzWRYfh2SW-ufw-0Oo82UPOePvdob/view?usp=sharing).
 
 
 ## Technologies Used
