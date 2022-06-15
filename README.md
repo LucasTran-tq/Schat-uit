@@ -1,5 +1,3 @@
-<img width="200" alt="image1" src="assets/logo.png">
-
 # SChat - Secure chat mobile application.
 
 
@@ -8,11 +6,8 @@
 * [Video Demo](#video-demo)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Deployment](#deployment)
 * [How to install and run the project](#how-to-install-and-run-the-project)
-* [Usage](#usage)
 * [Acknowledgements](#acknowledgements)
-* [AIT Team](#ait-team)
 * [License](#license)
 
 <!-- * [License](#license) -->
@@ -25,15 +20,15 @@ SChat is a fantastic messaging solution for security-conscious mobile users. It'
 
 SChat use ECDH to generate shared-secret to encrypt and decrypt messages. The attachments are encrypted via RSA key and AES before archiving on IPFS.
 
-This is the [Software Requirements Document](https://...)
+This is the [Software Requirements Document](https://drive.google.com/file/d/1Jlzh9OEwSdQpWql3-PnPTHbRkhymqKID/view?usp=sharing)
 
 
 
-</br>
-<img width="1000" alt="image1" src="assets/1.png"><img width="1000" alt="image2" src="assets/2.png">
-</br>
-<img width="600" alt="image3" src="assets/3.png"><img width="600" alt="image4" src="assets/4.png">
-<img width="600" alt="image5" src="assets/5.png"><img width="600" alt="image6" src="assets/6.png">
+<img width="400" alt="image1" src="assets/waitting.png" hspace="20"><img width="400" alt="image2" src="assets/listchat.png">
+<img width="400" alt="image3" src="assets/signupname.png" hspace="20"><img width="400" alt="image4" src="assets/signupphone.png">
+<img width="400" alt="image5" src="assets/otp.png" hspace="20"><img width="400" alt="image6" src="assets/signupsuccess.png">
+<img width="400" alt="image7" src="assets/login.png" hspace="20"><img width="400" alt="image8" src="assets/messageslist.png">
+
 
 ## Video Demo
 You can have a look with SChat through [the video](https://drive.google.com/file/d/14MWFZyD9VfW3nRQdY3ZghHX1KU8prToW/view?usp=sharing).
@@ -72,7 +67,9 @@ $ npm run start:dev
 
 ```
 *** Run Front-end
-...
+
+$ cd frontend
+$ expo start
 ```
 
 ```
@@ -111,7 +108,7 @@ The server is listening at port 3000
 - [Nguyen Huu Phat](https://github.com/nguyenhuuphat2001)
 
 
-## 📝 License
+## License
 
 Copyright © 2021. <br />
 This project is [MIT](https://github.com/LucasTran-tq/Schat-uit/blob/main/LICENSE) licensed.
