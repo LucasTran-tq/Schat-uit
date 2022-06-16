@@ -20,7 +20,7 @@ SChat is a fantastic messaging solution for security-conscious mobile users. It'
 
 SChat use ECDH to generate shared-secret to encrypt and decrypt messages. The attachments are encrypted via RSA key and AES before archiving on IPFS.
 
-This is the [Software Requirements Document](https://drive.google.com/file/d/1Jlzh9OEwSdQpWql3-PnPTHbRkhymqKID/view?usp=sharing)
+This is the [Software Requirements Document](https://drive.google.com/file/d/1a05Xv4THXcylsYXK4mVO170_owQaSECp/view?usp=sharing)
 
 
 
